@@ -1,34 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Executive Exam Dashboard</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Bifurcated Executive Dashboard</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:Segoe UI,Arial;background:#eef3f8}
-header{position:sticky;top:0;background:#0b3d91;color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;z-index:9}
-header h1{font-size:28px}#search{padding:10px 14px;border:none;border-radius:25px;min-width:260px}
-.wrap{padding:25px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:15px;margin-bottom:25px}
-.stat,.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 5px 15px rgba(0,0,0,.12);transition:.25s}.stat:hover,.card:hover{transform:translateY(-4px)}
-.stat h2{color:#0b3d91}.section{margin-top:25px}.title{font-size:24px;font-weight:700;margin-bottom:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.badge{display:inline-block;padding:5px 10px;border-radius:20px;color:#fff;font-size:12px;margin-bottom:10px}
-.completed{background:#28a745}.running{background:#ff9800}.upcoming{background:#007bff}
-.links a{display:inline-block;margin:6px 6px 0 0;padding:8px 12px;background:#0b3d91;color:#fff;text-decoration:none;border-radius:18px}
-footer{text-align:center;padding:20px;background:#0b3d91;color:#fff;margin-top:30px}
-@media(max-width:700px){#search{min-width:100%}}
+body{font-family:Segoe UI,Arial;background:#eef3f8;margin:0}
+header{background:#0b4ea2;color:#fff;padding:18px;position:sticky;top:0}
+.container{padding:20px}
+.section{margin:25px 0}.title{background:#ff7a00;color:#fff;padding:10px 15px;border-radius:8px;font-size:22px}
+.sub{font-size:18px;color:#0b4ea2;margin:15px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
+.card{background:#fff;padding:15px;border-left:5px solid #2196f3;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card.completed{border-color:#28a745}.card.running{border-color:#ff9800}
+a{display:inline-block;margin-top:8px;background:#0b4ea2;color:#fff;padding:8px 12px;border-radius:20px;text-decoration:none}
 </style></head><body>
-<header><h1><i class="fa-solid fa-chart-line"></i> Exam Project Dashboard</h1><input id="search" placeholder="Search projects..."></header>
-<div class="wrap">
-<div class="stats">
-<div class="stat"><h2>12</h2><p>Projects</p></div>
-<div class="stat"><h2>1</h2><p>Running</p></div>
-<div class="stat"><h2>5</h2><p>Upcoming</p></div>
-<div class="stat"><h2>3</h2><p>Completed</p></div>
+<header><h1>📊 Executive Exam Dashboard</h1></header>
+<div class='container'>
+<div class='section'><div class='title'>🎓 NTA PROJECTS</div>
+<div class='sub'>📋 Common Documents</div>
+<div class='grid'>
+<div class='card'><h3>Exam Activity</h3><a href='https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing'>Open</a></div>
+<div class='card'><h3>Exam Wise Centre</h3><a href='https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing'>Open</a></div>
+<div class='card'><h3>Candidate Data</h3><a href='https://www.google.com'>Open</a></div>
+<div class='card'><h3>Reports</h3><a href='https://www.google.com'>Open</a></div>
+<div class='card'><h3>FTP</h3><a href='https://www.google.com'>Open</a></div>
 </div>
-<div class="section"><div class="title">🎓 NTA Projects</div><div class="grid"><div class="card"><span class="badge upcoming">Statics</span><h3>Exam Activity</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing">Open</a></div></div><div class="card"><span class="badge upcoming">Statics</span><h3>Exam Wise Centre</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>AIAPGT - 22 Aug 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082">Open</a></div></div><div class="card"><span class="badge running">Running</span><h3>Allahabad High Court</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>Candidate Data</h3><div class="links"><a target="_blank" href="https://www.google.com">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>Reports</h3><div class="links"><a target="_blank" href="https://www.google.com">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>FTP</h3><div class="links"><a target="_blank" href="https://www.google.com">Open</a></div></div></div></div><div class="section"><div class="title">🟧 EdCIL Projects</div><div class="grid"><div class="card"><span class="badge upcoming">Upcoming</span><h3>Exam Wise Status</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/18cxo1MKtTWu5NDi4a8v_Jf105kHGTPigU8FcnGymq0o/edit?usp=sharing">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>Exam Activity</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>Exam Wise Centre</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f">Open</a></div></div><div class="card"><span class="badge completed">Completed</span><h3>NHIDCL - 29 Jun 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9">Open</a></div></div><div class="card"><span class="badge completed">Completed</span><h3>SPMCIL (IGM) - 01 Jul 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207">Open</a></div></div><div class="card"><span class="badge completed">Completed</span><h3>BLCL - 15 Jul 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776">Open</a></div></div><div class="card"><span class="badge running">Running</span><h3>PSPCL - 20 Jul 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>NBCC - 25 Jul 2026</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>SMPCIL Re-Exam</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>SMPCIL CNP</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>NHIDCL Mains</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082">Open</a></div></div></div></div><div class="section"><div class="title">📂 Other Documents</div><div class="grid"><div class="card"><span class="badge upcoming">Upcoming</span><h3>EDU Code (Jai)</h3><div class="links"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1btBgJIdvlVuvcmP6r-J0BueKDTYGaWolD4crATTp1S4/edit?usp=sharing_eip&ts=69dc9f86">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>TA/DA Tracker</h3><div class="links"><a target="_blank" href="https://intranet.eduquity.com/Tada_V2/Default.aspx">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>ODDO ERP</h3><div class="links"><a target="_blank" href="https://erp.eduquity.com/web/login?auth_login=Singh.rahul@eduquity.com">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>Advance Form</h3><div class="links"><a target="_blank" href="https://forms.gle/JXrsTDqoq82gNkDYA">Open</a></div></div></div></div><div class="section"><div class="title">🧪 Testing Links</div><div class="grid"><div class="card"><span class="badge upcoming">Upcoming</span><h3>Objection Management BLCL</h3><div class="links"><a target="_blank" href="https://test.cbexams.com/EDPSU/Scdfkeyadminpanelhdge/Login.aspx">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>PSPCL Admit</h3><div class="links"><a target="_blank" href="https://www.google.com">Open</a></div></div><div class="card"><span class="badge upcoming">Upcoming</span><h3>NBCC Admit</h3><div class="links"><a target="_blank" href="https://www.google.com">Open</a></div></div></div></div>
-</div><footer>© 2026 Exam Project Dashboard</footer>
-<script>
-const s=document.getElementById('search');
-s.oninput=()=>{const q=s.value.toLowerCase();document.querySelectorAll('.card').forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';});};
-</script></body></html>
+<div class='sub'>📝 Examinations</div>
+<div class='grid'>
+<div class='card'><h3>AIAPGT - 22 Aug 2026</h3><a href='https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082'>Dashboard</a></div>
+<div class='card running'><h3>Allahabad High Court</h3><a href='https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082'>Dashboard</a></div>
+</div></div>
+
+<div class='section'><div class='title'>🟧 EDCIL PROJECTS</div>
+<div class='sub'>📊 Common Documents</div>
+<div class='grid'>
+<div class='card'><h3>Exam Wise Status</h3><a href='https://docs.google.com/spreadsheets/d/18cxo1MKtTWu5NDi4a8v_Jf105kHGTPigU8FcnGymq0o/edit?usp=sharing'>Open</a></div>
+<div class='card'><h3>Exam Activity</h3><a href='https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing'>Open</a></div>
+<div class='card'><h3>Exam Wise Centre</h3><a href='https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f'>Open</a></div>
+</div>
+<div class='sub'>✅ Completed</div>
+<div class='grid'>
+<div class='card completed'><h3>NHIDCL</h3><a href='https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9'>Dashboard</a></div>
+<div class='card completed'><h3>SPMCIL (IGM)</h3><a href='https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207'>Dashboard</a></div>
+<div class='card completed'><h3>BLCL</h3><a href='https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776'>Dashboard</a></div>
+</div>
+<div class='sub'>🟠 Running</div>
+<div class='grid'><div class='card running'><h3>PSPCL</h3><a href='https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319'>Dashboard</a></div></div>
+<div class='sub'>🔵 Upcoming</div>
+<div class='grid'>
+<div class='card'><h3>NBCC</h3><a href='https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789'>Dashboard</a></div>
+<div class='card'><h3>SMPCIL Re-Exam</h3><a href='https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082'>Dashboard</a></div>
+<div class='card'><h3>SMPCIL CNP</h3><a href='https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478'>Dashboard</a></div>
+<div class='card'><h3>NHIDCL Mains</h3><a href='https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082'>Dashboard</a></div>
+</div></div>
+</div></body></html>
