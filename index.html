@@ -1,112 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Exam Project Dashboard</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
 <style>
 
+/* ==========================
+   RESET
+========================== */
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-    font-family:'Segoe UI',Arial,sans-serif;
-    background:#edf2f7;
-    padding:30px;
+
+font-family:'Segoe UI',sans-serif;
+background:#eef3fb;
+color:#333;
+
 }
 
-/* Header */
+/* ==========================
+HEADER
+========================== */
 
-.header{
-    background:linear-gradient(90deg,#003366,#0059b3,#007bff);
-    color:#fff;
-    padding:25px;
-    text-align:center;
-    border-radius:15px;
-    box-shadow:0 6px 20px rgba(0,0,0,.25);
-    margin-bottom:30px;
+header{
+
+position:sticky;
+top:0;
+z-index:999;
+background:linear-gradient(90deg,#003366,#0059b3,#0099ff);
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+
 }
 
-.header h1{
-    font-size:36px;
-    letter-spacing:1px;
+.logo{
+
+font-size:30px;
+font-weight:bold;
+color:#fff;
+
 }
 
-.header p{
-    margin-top:8px;
-    opacity:.9;
+nav{
+
+display:flex;
+gap:25px;
+
 }
 
-/* Section */
+nav a{
+
+color:#fff;
+text-decoration:none;
+font-weight:600;
+
+}
+
+nav a:hover{
+
+opacity:.8;
+
+}
+
+.right{
+
+display:flex;
+gap:15px;
+align-items:center;
+
+}
+
+/* Search */
+
+.search{
+
+background:#fff;
+padding:10px 18px;
+border-radius:30px;
+display:flex;
+align-items:center;
+
+}
+
+.search input{
+
+border:none;
+outline:none;
+font-size:15px;
+width:250px;
+
+}
+
+/* Dark button */
+
+#mode{
+
+background:#fff;
+border:none;
+padding:10px 15px;
+border-radius:30px;
+cursor:pointer;
+
+}
+
+/* ==========================
+HERO
+========================== */
+
+.hero{
+
+padding:70px 30px;
+text-align:center;
+background:linear-gradient(135deg,#003366,#007bff);
+
+color:white;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+}
+
+.hero p{
+
+margin-top:15px;
+font-size:18px;
+
+}
+
+/* ==========================
+DASHBOARD
+========================== */
+
+.dashboard{
+
+padding:40px;
+
+}
+
+/* cards */
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+border-radius:18px;
+padding:25px;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+transition:.35s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card h2{
+
+font-size:42px;
+color:#0056d6;
+
+}
+
+.card p{
+
+margin-top:10px;
+color:#666;
+
+}
+
+/* section */
 
 .section{
-    background:#fff;
-    border-radius:15px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+margin-top:45px;
+
 }
 
-/* Section Titles */
+.section-title{
 
-.title{
-    color:#fff;
-    font-size:24px;
-    font-weight:bold;
-    padding:14px 20px;
-    border-radius:10px;
-    display:inline-block;
-    margin-bottom:20px;
-    letter-spacing:1px;
+font-size:28px;
+margin-bottom:20px;
+font-weight:bold;
+display:flex;
+align-items:center;
+gap:10px;
+
 }
 
-.nta{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
+/* project grid */
+
+.projects{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+
 }
 
-.edcil{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
+/* project */
+
+.project{
+
+background:white;
+border-radius:15px;
+padding:25px;
+transition:.3s;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
 }
 
-.other{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
+.project:hover{
+
+transform:translateY(-6px);
+
 }
 
-/* Buttons */
+.project h3{
 
-.btn{
-    display:inline-block;
-    text-decoration:none;
-    color:#fff;
-    background:linear-gradient(45deg,#007bff,#00b4ff);
-    padding:14px 24px;
-    margin:8px;
-    border-radius:35px;
-    font-weight:600;
-    transition:.3s;
-    box-shadow:0 4px 10px rgba(0,123,255,.35);
+margin-bottom:10px;
+
 }
 
-.btn:hover{
-    transform:translateY(-4px);
-    background:linear-gradient(45deg,#0056b3,#0099cc);
-    box-shadow:0 8px 18px rgba(0,123,255,.45);
+.status{
+
+display:inline-block;
+padding:6px 12px;
+border-radius:30px;
+font-size:13px;
+font-weight:bold;
+margin-bottom:15px;
+
 }
 
-.divider{
-    margin:20px 0;
-    border-top:1px solid #ddd;
+.running{
+
+background:#fff4d7;
+color:#d48806;
+
+}
+
+.completed{
+
+background:#d4edda;
+color:#155724;
+
+}
+
+.upcoming{
+
+background:#d9ecff;
+color:#0056d6;
+
+}
+
+.critical{
+
+background:#ffe3e3;
+color:#d00000;
+
+}
+
+.links{
+
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+
+}
+
+.links a{
+
+text-decoration:none;
+padding:10px 15px;
+border-radius:30px;
+background:#007bff;
+color:white;
+font-size:14px;
+transition:.3s;
+
+}
+
+.links a:hover{
+
+background:#0056b3;
+
 }
 
 footer{
-    text-align:center;
-    margin-top:30px;
-    color:#777;
-    font-size:14px;
+
+margin-top:50px;
+padding:25px;
+text-align:center;
+background:#003366;
+color:white;
+
+}
+
+@media(max-width:768px){
+
+nav{
+
+display:none;
+
+}
+
+.search input{
+
+width:140px;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
 }
 
 </style>
@@ -115,136 +354,369 @@ footer{
 
 <body>
 
-<div class="header">
-<h1>📊 Exam Project Dashboard</h1>
-<p>Project Management | Monitoring | Reports | Documentation</p>
-</div>
+<header>
 
-<!-- ======================= NTA ======================= -->
+<div class="logo">
 
-<div class="section">
-
-<div class="title nta">
-📘 NTA PROJECTS
-</div>
-
-<br>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing" target="_blank">📋Exam Activity</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing" target="_blank">🏢Exam Wise Centre</a>
-    
-<div class="divider"></div>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank">AIAPGT - 22 Aug 2026</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">NTA Allahabad High Court(Date not confirm)</a>    
-<a class="btn" href="https://www.google.com" target="_blank">👥Candidate Data</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">📁Reports</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">☁ FTP</a>
+<i class="fa-solid fa-graduation-cap"></i>
+Exam Dashboard
 
 </div>
 
-<!-- ======================= EDCIL ======================= -->
+<nav>
 
-<div class="section">
+<a href="#dashboard">Dashboard</a>
+<a href="#nta">NTA</a>
+<a href="#edcil">EdCIL</a>
+<a href="#others">Documents</a>
 
-<div class="title edcil">
-🟧 EdCIL PROJECTS
-</div>
+</nav>
 
-<br>
+<div class="right">
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/18cxo1MKtTWu5NDi4a8v_Jf105kHGTPigU8FcnGymq0o/edit?usp=sharing" target="_blank">📊Exam Wise Status</a>
+<div class="search">
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing" target="_blank">📋Exam Activity</a>
+<i class="fa fa-search"></i>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f" target="_blank">🏢Exam Wise Centre</a>
-
-<div class="divider"></div>
-
-<style>
-.btn-green {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #28a745;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-}
-
-.btn-green hover {
-    background: #218838;
-}
-</style>
-
-    
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank">NHIDCL - 29 Jun 2026</a>
-
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank">SPMCIL (IGM) - 01 Jul 2026</a>
-
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776" target="_blank">BLCL - 15 Jul 2026</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319" target="_blank">PSPCL - 20 Jul 2026</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank">NBCC - 25 Jul 2026</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank">SMPCIL (IGM-Re-Exam) - 03rd Aug 2026</a>
-    
-<a class="btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank">SMPCIL (CNP) - 10 & 11 Aug 2026</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank">NHDCIL_Mains - 12th & 13th Aug 2026</a>
+<input
+id="searchBox"
+type="text"
+placeholder="Search Project...">
 
 </div>
 
-<!-- ======================= OTHER ======================= -->
+<button id="mode">
 
-<div class="section">
+🌙
 
-<div class="title other">
-📂 OTHER DOCUMENTS
-</div>
-
-<br>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1btBgJIdvlVuvcmP6r-J0BueKDTYGaWolD4crATTp1S4/edit?usp=sharing_eip&ts=69dc9f86" target="_blank">📄EDU Code (Jai)</a>
-
-<a class="btn" href="https://intranet.eduquity.com/Tada_V2/Default.aspx
-" target="_blank">💼TA DA Tracker</a>
-
-<a class="btn" href="https://erp.eduquity.com/web/login?auth_login=Singh.rahul@eduquity.com
-" target="_blank">🗂ODDO ERP</a>
-
-<a class="btn" href="https://forms.gle/JXrsTDqoq82gNkDYA" target="_blank">💰Advance Form</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">📁Reports</a>
+</button>
 
 </div>
 
-<!-- ======================= Testing Link ======================= -->
+</header>
 
-<div class="section">
+<section class="hero">
 
-<div class="title other">
-🧪 TESTING LINKS
+<h1>
+
+Executive Exam Management Dashboard
+
+</h1>
+
+<p>
+
+Project Monitoring • Reports • Documentation • Live Status
+
+</p>
+
+</section>
+
+<div class="dashboard" id="dashboard">
+
+<div class="cards">
+
+<div class="card">
+
+<h2>12</h2>
+
+<p>Total Projects</p>
+
 </div>
 
-<br>
+<div class="card">
 
-<a class="btn" href="https://test.cbexams.com/EDPSU/Scdfkeyadminpanelhdge/Login.aspx" target="_blank">Objection Management BLCL</a>
+<h2>4</h2>
 
-<a class="btn" href="https://www.google.com" target="_blank">PSPCL ADMIT</a>
+<p>Running</p>
 
-<a class="btn" href="https://www.google.com" target="_blank">NBCC ADMIT</a>
+</div>
+
+<div class="card">
+
+<h2>5</h2>
+
+<p>Upcoming</p>
+
+</div>
+
+<div class="card">
+
+<h2>3</h2>
+
+<p>Completed</p>
+
+</div>
+
+</div>
+
+<!-- NTA -->
+
+<div class="section" id="nta">
+
+<div class="section-title">
+
+🎓 NTA Projects
+
+</div>
+
+<div class="projects">
+
+<div class="project">
+
+<span class="status upcoming">
+
+Upcoming
+
+</span>
+
+<h3>AIAPGT</h3>
+
+<p>
+
+22 August 2026
+
+</p>
+
+<div class="links">
+
+<a href="YOUR_LINK">Open Sheet</a>
+
+<a href="#">Reports</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<span class="status running">
+
+Running
+
+</span>
+
+<h3>Allahabad High Court</h3>
+
+<p>Date Awaited</p>
+
+<div class="links">
+
+<a href="#">Open Sheet</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- EDCIL -->
+
+<div class="section" id="edcil">
+
+<div class="section-title">
+
+🟧 EdCIL Projects
+
+</div>
+
+<div class="projects">
+
+<div class="project">
+
+<span class="status completed">
+
+Completed
+
+</span>
+
+<h3>
+
+NHIDCL
+
+</h3>
+
+<p>
+
+29 June 2026
+
+</p>
+
+<div class="links">
+
+<a href="#">Open Sheet</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<span class="status completed">
+
+Completed
+
+</span>
+
+<h3>
+
+SPMCIL (IGM)
+
+</h3>
+
+<p>
+
+01 July 2026
+
+</p>
+
+<div class="links">
+
+<a href="#">Open Sheet</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<span class="status running">
+
+Running
+
+</span>
+
+<h3>
+
+PSPCL
+
+</h3>
+
+<p>
+
+20 July 2026
+
+</p>
+
+<div class="links">
+
+<a href="#">Open Sheet</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<span class="status upcoming">
+
+Upcoming
+
+</span>
+
+<h3>
+
+SMPCIL Re-Exam
+
+</h3>
+
+<p>
+
+03 August 2026
+
+</p>
+
+<div class="links">
+
+<a href="#">Open Sheet</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Others -->
+
+<div class="section" id="others">
+
+<div class="section-title">
+
+📂 Other Documents
+
+</div>
+
+<div class="projects">
+
+<div class="project">
+
+<h3>
+
+TA/DA Tracker
+
+</h3>
+
+<div class="links">
+
+<a href="#">Open</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<h3>
+
+ERP
+
+</h3>
+
+<div class="links">
+
+<a href="#">Open</a>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<h3>
+
+Advance Form
+
+</h3>
+
+<div class="links">
+
+<a href="#">Open</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <footer>
-© 2026 Exam Project Dashboard | Developed for Project Management
+
+© 2026 Exam Dashboard | Executive Project Monitoring
+
 </footer>
+
+<script>
+
+// JavaScript (search, dark mode, counters, animations)
+// will be added in Part 2.
+
+</script>
 
 </body>
 </html>
