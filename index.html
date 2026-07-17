@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -29,6 +29,7 @@ body{
     border-radius:15px;
     box-shadow:0 6px 20px rgba(0,0,0,.25);
     margin-bottom:30px;
+    position:relative;
 }
 
 .header h1{
@@ -40,6 +41,21 @@ body{
     margin-top:8px;
     opacity:.9;
 }
+
+.datetime{
+    position:absolute;
+    top:15px;
+    right:25px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(8px);
+    color:#fff;
+    padding:10px 16px;
+    border-radius:10px;
+    text-align:right;
+    line-height:1.4;
+}
+.datetime .date{font-size:15px;font-weight:600;}
+.datetime .time{font-size:22px;font-weight:700;}
 
 /* Section */
 
@@ -64,15 +80,7 @@ body{
     letter-spacing:1px;
 }
 
-.nta{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
-}
-
-.edcil{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
-}
-
-.other{
+.nta,.edcil,.other{
     background:linear-gradient(90deg,#ff6a00,#ff9900);
 }
 
@@ -97,6 +105,18 @@ body{
     box-shadow:0 8px 18px rgba(0,123,255,.45);
 }
 
+.btn-green {
+    display:inline-block;
+    padding:10px 18px;
+    background:#28a745;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:600;
+    margin:8px;
+}
+.btn-green:hover{background:#218838;}
+
 .divider{
     margin:20px 0;
     border-top:1px solid #ddd;
@@ -118,6 +138,7 @@ footer{
 <div class="header">
 <h1>📊 Exam Project Dashboard</h1>
 <p>Project Management | Monitoring | Reports | Documentation</p>
+<div class="datetime" id="datetime"></div>
 </div>
 
 <!-- ======================= NTA ======================= -->
@@ -245,6 +266,38 @@ footer{
 <footer>
 © 2026 Exam Project Dashboard | Developed for Project Management
 </footer>
+
+</body>
+</html>
+
+<footer>
+© 2026 Exam Project Dashboard | Developed for Project Management
+</footer>
+
+<script>
+function updateDateTime() {
+    const now = new Date();
+
+    const date = now.toLocaleDateString('en-IN', {
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const time = now.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+
+    document.getElementById("datetime").innerHTML =
+        '<div class="date">'+date+'</div><div class="time">'+time+'</div>';
+}
+updateDateTime();
+setInterval(updateDateTime,1000);
+</script>
 
 </body>
 </html>
