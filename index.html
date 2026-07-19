@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <meta charset="UTF-8">
@@ -173,7 +174,6 @@ footer{
 
 
 
-
 <!-- ======================= NTA ======================= -->
 
 <div class="section">
@@ -187,13 +187,12 @@ footer{
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing" target="_blank">📋Exam Activity</a>
 
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing" target="_blank">🏢Exam Wise Centre</a>
-    
+
 <div class="divider"></div>
 
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank">AIAPGT - 22 Aug 2026</a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">NTA Allahabad High Court(Date not confirm)</a>    
-<a class="btn" href="https://www.google.com" target="_blank">👥Candidate Data</a>
+<a class="btn" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">NTA Allahabad High Court(Date not confirm)</a><a class="btn" href="https://www.google.com" target="_blank">👥Candidate Data</a>
 
 <a class="btn" href="https://www.google.com" target="_blank">📁Reports</a>
 
@@ -221,7 +220,6 @@ footer{
 
 
 
-    
 <a class="btn-green" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank">NHIDCL - 29 Jun 2026</a>
 
 <a class="btn-green" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank">SPMCIL (IGM) - 01 Jul 2026</a>
@@ -233,7 +231,7 @@ footer{
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank">NBCC - 25 Jul 2026</a>
 
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank">SMPCIL (IGM-Re-Exam) - 03rd Aug 2026</a>
-    
+
 <a class="btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank">SMPCIL (CNP) - 10 & 11 Aug 2026</a>
 
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank">NHDCIL_Mains - 12th & 13th Aug 2026</a>
@@ -276,8 +274,7 @@ footer{
 
 <a class="btn" href="https://test.cbexams.com/EDPSU/Scdfkeyadminpanelhdge/Login.aspx" target="_blank">Objection Management BLCL</a>
 
-<a class="btn" href="https://test.cbexams.com/EDPSU/NHIDCL2/PhotoSign/CandidatePhotos.aspx" target="_blank">NHIDCL DM Post
-Candidate Images</a>
+<a class="btn" href="https://test.cbexams.com/EDPSU/NHIDCL2/PhotoSign/CandidatePhotos.aspx" target="_blank">NHIDCL DM PostCandidate Images</a>
 
 <a class="btn" href="https://www.google.com" target="_blank">NBCC ADMIT</a>
 
@@ -289,53 +286,45 @@ Candidate Images</a>
 
 <script>
 
-
-const defaultUsers=[
+const users=[
  {username:'admin',password:'admin1234'},
- {username:'Avanish Shukla',password:'12345678'},
- {username:'Rahul Singh',password:'abc123456'}
+ {username:'Avanish Shukla',password:'7525024242'},
+ {username:'Rahul Singh',password:'8595366011'},
 ];
-let users=JSON.parse(localStorage.getItem('users'));
-if(!users){
- users=defaultUsers.map(u=>({...u,firstLogin:true}));
- localStorage.setItem('users',JSON.stringify(users));
-}
-let currentUser=null;
+
 if(localStorage.getItem('examLogin')==='yes'){loginSuccess();}
+
 function login(){
- const u=username.value.trim(),p=password.value;
+ const u=username.value.trim();
+ const p=password.value;
  const user=users.find(x=>x.username===u && x.password===p);
- if(!user){err.innerText='Invalid username or password';return;}
- currentUser=user;
- if(user.firstLogin){document.getElementById('changePassword').style.display='flex';return;}
- localStorage.setItem('examLogin','yes');
- localStorage.setItem('examUser',user.username);
- loginSuccess();
+ if(user){
+   localStorage.setItem('examLogin','yes');
+   localStorage.setItem('examUser',user.username);
+   loginSuccess();
+ }else{
+   err.innerText='Invalid username or password';
+ }
 }
-function savePassword(){
- const p1=newPassword.value,p2=confirmPassword.value;
- if(p1.length<8){passError.innerText='Minimum 8 characters';return;}
- if(p1!==p2){passError.innerText='Passwords do not match';return;}
- currentUser.password=p1;
- currentUser.firstLogin=false;
- localStorage.setItem('users',JSON.stringify(users));
- document.getElementById('changePassword').style.display='none';
- localStorage.setItem('examLogin','yes');
- localStorage.setItem('examUser',currentUser.username);
- loginSuccess();
-}
+
 function loginSuccess(){
  loginPage.style.display='none';
  dashboard.style.display='block';
  const btn=document.querySelector('button[onclick="logout()"]');
- if(btn) btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
+ if(btn){
+   btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
+ }
 }
+
 function logout(){
  localStorage.removeItem('examLogin');
  localStorage.removeItem('examUser');
  location.reload();
 }
+
 password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
+
+
 function updateLiveDateTime(){
  const now=new Date();
  document.getElementById('liveDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
@@ -343,18 +332,9 @@ function updateLiveDateTime(){
 }
 setInterval(updateLiveDateTime,1000);
 updateLiveDateTime();
+
 </script>
 
 </div>
-
-<div id="changePassword" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:99999;">
-<div style="background:#fff;width:420px;padding:30px;border-radius:12px;">
-<h2>Create Your Password</h2>
-<input id="newPassword" type="password" placeholder="New Password" style="width:100%;padding:12px;margin:10px 0">
-<input id="confirmPassword" type="password" placeholder="Confirm Password" style="width:100%;padding:12px;margin:10px 0">
-<div id="passError" style="color:red"></div>
-<button onclick="savePassword()" style="width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:8px;">Save Password</button>
-</div></div>
-
 </body>
 </html>
