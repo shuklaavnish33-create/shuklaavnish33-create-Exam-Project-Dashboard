@@ -1,6 +1,6 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exam Project Dashboard</title>
@@ -133,7 +133,23 @@ footer{
 
 </head>
 
+
 <body>
+
+<div id="loginPage" style="display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#003366,#007bff);">
+<div style="background:#fff;padding:35px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.3);width:360px">
+<h2 style="text-align:center;color:#003366">Exam Project Dashboard</h2>
+<input id="username" placeholder="Username" style="width:100%;padding:12px;margin:10px 0">
+<input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0">
+<label><input type="checkbox" onclick="password.type=this.checked?'text':'password'"> Show Password</label>
+<button onclick="login()" style="width:100%;padding:12px;margin-top:15px;background:#007bff;color:#fff;border:none;border-radius:8px">Login</button>
+<div id="err" style="color:red;margin-top:10px"></div>
+<p style="font-size:13px;color:#666">Default: <b>admin</b> / <b>eduquity123</b></p>
+</div>
+</div>
+
+<div id="dashboard" style="display:none">
+<button onclick="logout()" style="position:fixed;top:15px;right:20px;z-index:9999;background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:8px">Logout</button>
 
 <div class="header">
 <h1>📊 Exam Project Dashboard</h1>
@@ -268,37 +284,26 @@ Candidate Images</a>
 © 2026 Exam Project Dashboard | Developed for Project Management
 </footer>
 
-</body>
-</html>
-
-<footer>
-© 2026 Exam Project Dashboard | Developed for Project Management
-</footer>
-
 <script>
-function updateDateTime() {
-    const now = new Date();
-
-    const date = now.toLocaleDateString('en-IN', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    });
-
-    const time = now.toLocaleTimeString('en-IN', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-    });
-
-    document.getElementById("datetime").innerHTML =
-        '<div class="date">'+date+'</div><div class="time">'+time+'</div>';
+const USER='admin',PASS='eduquity123';
+if(localStorage.getItem('examLogin')==='yes'){loginSuccess();}
+function login(){
+ if(username.value===USER && password.value===PASS){
+   localStorage.setItem('examLogin','yes');
+   loginSuccess();
+ } else err.innerText='Invalid username or password';
 }
-updateDateTime();
-setInterval(updateDateTime,1000);
+function loginSuccess(){
+ loginPage.style.display='none';
+ dashboard.style.display='block';
+}
+function logout(){
+ localStorage.removeItem('examLogin');
+ location.reload();
+}
+password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
 </script>
 
+</div>
 </body>
 </html>
