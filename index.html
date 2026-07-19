@@ -149,6 +149,11 @@ footer{
 </div>
 
 <div id="dashboard" style="display:none">
+
+<div id="liveDateTime" style="position:fixed;top:15px;left:20px;background:rgba(0,51,102,.9);color:#fff;padding:10px 16px;border-radius:10px;z-index:9999;font-family:Segoe UI;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.3)">
+<div id="liveDate"></div>
+<div id="liveTime" style="font-size:22px;font-weight:bold"></div>
+</div>
 <button onclick="logout()" style="position:fixed;top:15px;right:20px;z-index:9999;background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:8px">Logout</button>
 
 <div class="header">
@@ -302,6 +307,15 @@ function logout(){
  location.reload();
 }
 password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
+
+function updateLiveDateTime(){
+ const now=new Date();
+ document.getElementById('liveDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+ document.getElementById('liveTime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+}
+setInterval(updateLiveDateTime,1000);
+updateLiveDateTime();
+
 </script>
 
 </div>
