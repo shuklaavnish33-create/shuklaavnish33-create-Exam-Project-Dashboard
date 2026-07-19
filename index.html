@@ -289,45 +289,53 @@ Candidate Images</a>
 
 <script>
 
-const users=[
+
+const defaultUsers=[
  {username:'admin',password:'admin1234'},
  {username:'Avanish Shukla',password:'7525024242'},
- {username:'Rahul Singh',password:'8595366011'},
+ {username:'Rahul Singh',password:'8595366011'}
 ];
-
-if(localStorage.getItem('examLogin')==='yes'){loginSuccess();}
-
-function login(){
- const u=username.value.trim();
- const p=password.value;
- const user=users.find(x=>x.username===u && x.password===p);
- if(user){
-   localStorage.setItem('examLogin','yes');
-   localStorage.setItem('examUser',user.username);
-   loginSuccess();
- }else{
-   err.innerText='Invalid username or password';
- }
+let users=JSON.parse(localStorage.getItem('users'));
+if(!users){
+ users=defaultUsers.map(u=>({...u,firstLogin:true}));
+ localStorage.setItem('users',JSON.stringify(users));
 }
-
+let currentUser=null;
+if(localStorage.getItem('examLogin')==='yes'){loginSuccess();}
+function login(){
+ const u=username.value.trim(),p=password.value;
+ const user=users.find(x=>x.username===u && x.password===p);
+ if(!user){err.innerText='Invalid username or password';return;}
+ currentUser=user;
+ if(user.firstLogin){document.getElementById('changePassword').style.display='flex';return;}
+ localStorage.setItem('examLogin','yes');
+ localStorage.setItem('examUser',user.username);
+ loginSuccess();
+}
+function savePassword(){
+ const p1=newPassword.value,p2=confirmPassword.value;
+ if(p1.length<8){passError.innerText='Minimum 8 characters';return;}
+ if(p1!==p2){passError.innerText='Passwords do not match';return;}
+ currentUser.password=p1;
+ currentUser.firstLogin=false;
+ localStorage.setItem('users',JSON.stringify(users));
+ document.getElementById('changePassword').style.display='none';
+ localStorage.setItem('examLogin','yes');
+ localStorage.setItem('examUser',currentUser.username);
+ loginSuccess();
+}
 function loginSuccess(){
  loginPage.style.display='none';
  dashboard.style.display='block';
  const btn=document.querySelector('button[onclick="logout()"]');
- if(btn){
-   btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
- }
+ if(btn) btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
 }
-
 function logout(){
  localStorage.removeItem('examLogin');
  localStorage.removeItem('examUser');
  location.reload();
 }
-
 password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
-
-
 function updateLiveDateTime(){
  const now=new Date();
  document.getElementById('liveDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
@@ -335,9 +343,18 @@ function updateLiveDateTime(){
 }
 setInterval(updateLiveDateTime,1000);
 updateLiveDateTime();
-
 </script>
 
 </div>
+
+<div id="changePassword" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:99999;">
+<div style="background:#fff;width:420px;padding:30px;border-radius:12px;">
+<h2>Create Your Password</h2>
+<input id="newPassword" type="password" placeholder="New Password" style="width:100%;padding:12px;margin:10px 0">
+<input id="confirmPassword" type="password" placeholder="Confirm Password" style="width:100%;padding:12px;margin:10px 0">
+<div id="passError" style="color:red"></div>
+<button onclick="savePassword()" style="width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:8px;">Save Password</button>
+</div></div>
+
 </body>
 </html>
