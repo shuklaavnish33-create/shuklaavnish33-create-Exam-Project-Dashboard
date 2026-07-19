@@ -50,7 +50,7 @@ body{
 
     background: rgba(255,255,255,.15);
     backdrop-filter: blur(8px);
-    color: #000;
+    color:#fff;
     padding: 10px 16px;
     border-radius: 10px;
     text-align: right;
@@ -131,6 +131,17 @@ footer{
     font-size:14px;
 }
 
+
+.topbar{position:sticky;top:0;z-index:9999;background:linear-gradient(90deg,#003366,#0059b3,#007bff);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:12px;margin-bottom:20px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.brand{font-size:22px;font-weight:700}
+.clock{text-align:center}
+.clock #liveDate{font-size:14px}
+.clock #liveTime{font-size:22px;font-weight:700}
+.logoutBtn{background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer}
+.logoutBtn:hover{background:#b02a37}
+.header .datetime{display:none}
+@media(max-width:768px){.topbar{flex-direction:column;gap:8px}.brand{font-size:18px}}
+
 </style>
 
 </head>
@@ -146,23 +157,23 @@ footer{
 <label><input type="checkbox" onclick="password.type=this.checked?'text':'password'"> Show Password</label>
 <button onclick="login()" style="width:100%;padding:12px;margin-top:15px;background:#007bff;color:#fff;border:none;border-radius:8px">Login</button>
 <div id="err" style="color:red;margin-top:10px"></div>
-<p style="font-size:13px;color:#666">Default: <b>admin</b> / <b>eduquity123</b></p>
+<p style="font-size:13px;color:#666">Login with your assigned username and password.</p>
 </div>
 </div>
 
 <div id="dashboard" style="display:none">
 
-<div id="liveDateTime" style="position:fixed;top:15px;left:20px;background:rgba(0,51,102,.9);color:#fff;padding:10px 16px;border-radius:10px;z-index:9999;font-family:Segoe UI;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.3)">
-<div id="liveDate"></div>
-<div id="liveTime" style="font-size:22px;font-weight:bold"></div>
+<div class="topbar">
+  <div class="brand">📊 Exam Project Dashboard</div>
+  <div class="clock">
+    <div id="liveDate"></div>
+    <div id="liveTime"></div>
+  </div>
+  <button class="logoutBtn" onclick="logout()">Logout</button>
 </div>
-<button onclick="logout()" style="position:fixed;top:15px;right:20px;z-index:9999;background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:8px">Logout</button>
 
-<div class="header">
-<h1>📊 Exam Project Dashboard</h1>
-<p>Project Management | Monitoring | Reports | Documentation</p>
-<div class="datetime" id="datetime"></div>
-</div>
+
+
 
 <!-- ======================= NTA ======================= -->
 
@@ -209,21 +220,7 @@ footer{
 
 <div class="divider"></div>
 
-<style>
-.btn-green {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #28a745;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 999px;
-    font-weight: 600;
-}
 
-.btn-green hover {
-    background: #218838;
-}
-</style>
 
     
 <a class="btn-green" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank">NHIDCL - 29 Jun 2026</a>
@@ -292,23 +289,47 @@ Candidate Images</a>
 </footer>
 
 <script>
-const USER='admin',PASS='eduquity123';
+
+const users=[
+ {username:'admin',password:'eduquity123'},
+ {username:'avanish',password:'edu123'},
+ {username:'rahul',password:'rahul123'},
+ {username:'shantha',password:'shantha123'},
+ {username:'jai',password:'jai123'}
+];
+
 if(localStorage.getItem('examLogin')==='yes'){loginSuccess();}
+
 function login(){
- if(username.value===USER && password.value===PASS){
+ const u=username.value.trim();
+ const p=password.value;
+ const user=users.find(x=>x.username===u && x.password===p);
+ if(user){
    localStorage.setItem('examLogin','yes');
+   localStorage.setItem('examUser',user.username);
    loginSuccess();
- } else err.innerText='Invalid username or password';
+ }else{
+   err.innerText='Invalid username or password';
+ }
 }
+
 function loginSuccess(){
  loginPage.style.display='none';
  dashboard.style.display='block';
+ const btn=document.querySelector('button[onclick="logout()"]');
+ if(btn){
+   btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
+ }
 }
+
 function logout(){
  localStorage.removeItem('examLogin');
+ localStorage.removeItem('examUser');
  location.reload();
 }
+
 password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
+
 
 function updateLiveDateTime(){
  const now=new Date();
