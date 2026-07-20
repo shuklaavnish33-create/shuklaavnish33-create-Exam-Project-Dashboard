@@ -143,6 +143,12 @@ footer{
 .header .datetime{display:none}
 @media(max-width:768px){.topbar{flex-direction:column;gap:8px}.brand{font-size:18px}}
 
+
+.status{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;color:#fff}
+.completed{background:#28a745}
+.running{background:#ff9800}
+.upcoming{background:#2196f3}
+
 </style>
 
 </head>
@@ -157,7 +163,7 @@ footer{
 <label><input type="checkbox" onclick="password.type=this.checked?'text':'password'"> Show Password</label>
 <button onclick="login()" style="width:100%;padding:12px;margin-top:15px;background:#007bff;color:#fff;border:none;border-radius:8px">Login</button>
 <div id="err" style="color:red;margin-top:10px"></div>
-<p style="font-size:13px;color:#666">Login with your assigned username(Your Name) and password(Your Mobile No.).</p>
+<p style="font-size:13px;color:#666">Login with your assigned username and password.</p>
 </div>
 </div>
 
@@ -190,7 +196,7 @@ footer{
 
 <div class="divider"></div>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank">AIAPGT - 22 Aug 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-22">AIAPGT - 22 Aug 2026 <span class="status"></span></a>
 
 <a class="btn" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">NTA Allahabad High Court(Date not confirm)</a><a class="btn" href="https://www.google.com" target="_blank">👥Candidate Data</a>
 
@@ -220,21 +226,21 @@ footer{
 
 
 
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank">NHIDCL - 29 Jun 2026</a>
+<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank" data-date="2026-06-29">NHIDCL - 29 Jun 2026 <span class="status"></span></a>
 
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank">SPMCIL (IGM) - 01 Jul 2026</a>
+<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank" data-date="2026-07-01">SPMCIL (IGM) - 01 Jul 2026 <span class="status"></span></a>
 
-<a class="btn-green" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776" target="_blank">BLCL - 15 Jul 2026</a>
+<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776" target="_blank" data-date="2026-07-15">BLCL - 15 Jul 2026 <span class="status"></span></a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319" target="_blank">PSPCL - 20 Jul 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319" target="_blank" data-date="2026-07-20">PSPCL - 20 Jul 2026 <span class="status"></span></a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank">NBCC - 25 Jul 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank" data-date="2026-07-25">NBCC - 25 Jul 2026 <span class="status"></span></a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank">SMPCIL (IGM-Re-Exam) - 03rd Aug 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-03">SMPCIL (IGM-Re-Exam) - 03rd Aug 2026 <span class="status"></span></a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank">SMPCIL (CNP) - 18th & 19th Aug 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-11">SMPCIL (CNP) - 10 & 11 Aug 2026 <span class="status"></span></a>
 
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank">NHDCIL_Mains - 12th & 13th Aug 2026</a>
+<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-13">NHDCIL_Mains - 12th & 13th Aug 2026 <span class="status"></span></a>
 
 </div>
 
@@ -332,6 +338,20 @@ function updateLiveDateTime(){
 }
 setInterval(updateLiveDateTime,1000);
 updateLiveDateTime();
+
+
+function updateExamStatus(){
+const t=new Date();t.setHours(0,0,0,0);
+document.querySelectorAll('.exam-btn').forEach(b=>{
+ let s=b.querySelector('.status'); if(!s)return;
+ let d=new Date(b.dataset.date); d.setHours(0,0,0,0);
+ let r=new Date(d); r.setDate(r.getDate()-3);
+ if(t>d){s.textContent='Completed';s.className='status completed';}
+ else if(t>=r){s.textContent='Running';s.className='status running';}
+ else{s.textContent='Upcoming';s.className='status upcoming';}
+});
+}
+document.addEventListener('DOMContentLoaded',updateExamStatus);
 
 </script>
 
