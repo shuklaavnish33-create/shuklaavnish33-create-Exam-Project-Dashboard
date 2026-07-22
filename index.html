@@ -1,300 +1,539 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exam Project Dashboard</title>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root{
+  --bg-deep:#eef2f8;
+  --bg-panel:#ffffff;
+  --bg-panel-alt:#fbfcfe;
+  --bg-row:#f4f7fb;
+  --bg-row-hover:#eaf0f9;
+  --border:#dfe6f0;
+  --border-soft:#e8edf4;
+  --text-primary:#1c2b45;
+  --text-muted:#5b6b85;
+  --text-dim:#8a97ab;
+  --accent-amber:#c8791a;
+  --accent-amber-dim:#c8791a1a;
+  --accent-green:#158a4d;
+  --accent-green-dim:#158a4d1a;
+  --accent-blue:#2a5ed6;
+  --accent-blue-dim:#2a5ed61a;
+  --accent-orange:#d9720f;
+  --accent-orange-dim:#d9720f1a;
+  --accent-red:#d13438;
+  --accent-slate:#5b6b85;
+  --accent-slate-dim:#5b6b851a;
+  --radius:14px;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --shadow-soft:0 8px 22px rgba(28,43,69,.08);
+  --shadow-lift:0 14px 30px rgba(28,43,69,.12);
+  --navy-deep:#0e2148;
+  --navy-mid:#173a72;
 }
+
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    font-family:'Segoe UI',Arial,sans-serif;
-    background:#edf2f7;
-    padding:30px;
+  font-family:var(--font-body);
+  background:
+    radial-gradient(1100px 560px at 12% -8%, #dde7f7 0%, transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, #e6edfb 0%, transparent 55%),
+    var(--bg-deep);
+  color:var(--text-primary);
+  min-height:100vh;
 }
 
-/* Header */
+::selection{background:var(--accent-amber);color:#fff;}
 
-.header{
-    background:linear-gradient(90deg,#003366,#0059b3,#007bff);
-    color:#fff;
-    padding:25px;
-    text-align:center;
-    border-radius:15px;
-    box-shadow:0 6px 20px rgba(0,0,0,.25);
-    margin-bottom:30px;
-    position:relative;
+/* ---------------- LOGIN ---------------- */
+
+#loginPage{
+  display:flex;justify-content:center;align-items:center;height:100vh;
+  position:relative;overflow:hidden;
+  background:linear-gradient(150deg,var(--navy-deep) 0%,var(--navy-mid) 55%,#2457a3 100%);
 }
-
-.header h1{
-    font-size:36px;
-    letter-spacing:1px;
+#loginPage::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(circle at center, black, transparent 75%);
+  opacity:.6;
 }
-
-.header p{
-    margin-top:8px;
-    opacity:.9;
+.login-card{
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-alt));
+  border:1px solid var(--border);
+  padding:38px 34px 30px;
+  border-radius:var(--radius);
+  width:380px;
+  box-shadow:0 24px 60px rgba(6,16,38,.45);
 }
-
-.datetime {
-    position: absolute;
-    top: 50%;
-    right: 25px;
-    transform: translateY(-50%);
-
-    background: rgba(255,255,255,.15);
-    backdrop-filter: blur(8px);
-    color:#fff;
-    padding: 10px 16px;
-    border-radius: 10px;
-    text-align: right;
-    line-height: 1.4;
+.login-eyebrow{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--accent-amber);
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:14px;
 }
-.datetime .date{font-size:15px;font-weight:600;}
-.datetime .time{font-size:22px;font-weight:700;}
+.login-eyebrow::before{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--accent-green);
+  box-shadow:0 0 0 4px var(--accent-green-dim);
+}
+.login-card h2{
+  font-family:var(--font-display);
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:.01em;
+  margin-bottom:6px;
+}
+.login-sub{color:var(--text-muted);font-size:13px;margin-bottom:24px;}
+.field-label{
+  font-family:var(--font-mono);
+  font-size:11px;color:var(--text-dim);
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:6px;display:block;
+}
+#loginPage input[type="text"],#loginPage input[type="password"]{
+  width:100%;padding:12px 14px;margin-bottom:16px;
+  background:var(--bg-row);
+  border:1px solid var(--border);
+  border-radius:9px;
+  color:var(--text-primary);
+  font-family:var(--font-body);
+  font-size:14px;
+  outline:none;
+  transition:border-color .15s;
+}
+#loginPage input:focus{border-color:var(--accent-amber);}
+.show-pass{
+  display:flex;align-items:center;gap:8px;
+  font-size:12.5px;color:var(--text-muted);margin-bottom:18px;cursor:pointer;
+}
+#loginBtn{
+  width:100%;padding:13px;
+  background:linear-gradient(90deg,var(--accent-amber),#f0b95f);
+  color:#20140a;border:none;border-radius:9px;
+  font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:.02em;
+  cursor:pointer;transition:transform .15s,box-shadow .15s;
+}
+#loginBtn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(232,163,61,.3);}
+#err{color:var(--accent-red);margin-top:12px;font-size:12.5px;font-family:var(--font-mono);min-height:14px;}
+.login-foot{font-size:12px;color:var(--text-dim);margin-top:16px;line-height:1.5;}
 
-/* Section */
+/* ---------------- SHELL ---------------- */
+
+#dashboard{max-width:1200px;margin:0 auto;padding:22px 22px 60px;}
+
+.topbar{
+  position:sticky;top:14px;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-alt));
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-lift);
+  margin-bottom:22px;
+  gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent-amber),#c97f1a);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;font-size:15px;color:#1a1200;
+}
+.brand-text{font-family:var(--font-display);font-size:17px;font-weight:700;line-height:1.15;}
+.brand-text small{display:block;font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);font-weight:500;letter-spacing:.08em;}
+
+.clock{
+  text-align:center;font-family:var(--font-mono);
+  display:flex;align-items:center;gap:12px;
+  background:var(--bg-row);border:1px solid var(--border-soft);
+  padding:8px 16px;border-radius:9px;
+}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 0 4px var(--accent-green-dim);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.clock-text #liveDate{font-size:11px;color:var(--text-muted);letter-spacing:.02em;}
+.clock-text #liveTime{font-size:17px;font-weight:600;color:var(--text-primary);}
+
+.userbox{display:flex;align-items:center;gap:10px;}
+.userchip{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-muted);
+  background:var(--bg-row);border:1px solid var(--border-soft);
+  padding:8px 14px;border-radius:9px;
+}
+.logoutBtn{
+  background:var(--accent-red);color:#fff;border:none;
+  padding:10px 16px;border-radius:9px;font-weight:600;font-size:13px;
+  cursor:pointer;transition:filter .15s;
+}
+.logoutBtn:hover{filter:brightness(1.1);}
+
+/* summary strip */
+.summary-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;
+}
+.stat-card{
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-alt));
+  border:1px solid var(--border);border-radius:12px;
+  padding:16px 18px;
+}
+.stat-card .num{font-family:var(--font-display);font-size:26px;font-weight:700;}
+.stat-card .lbl{font-family:var(--font-mono);font-size:10.5px;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;}
+.stat-card.upcoming .num{color:var(--accent-blue);}
+.stat-card.running .num{color:var(--accent-orange);}
+.stat-card.completed .num{color:var(--accent-green);}
+.stat-card.total .num{color:var(--text-primary);}
+
+/* search */
+.search-row{margin-bottom:22px;}
+#searchBox{
+  width:100%;padding:13px 16px;
+  background:var(--bg-panel);border:1px solid var(--border);border-radius:11px;
+  color:var(--text-primary);font-family:var(--font-body);font-size:14px;outline:none;
+  transition:border-color .15s;
+}
+#searchBox::placeholder{color:var(--text-dim);}
+#searchBox:focus{border-color:var(--accent-amber);}
+
+/* tabs */
+.tab-row{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  margin-bottom:22px;
+  background:var(--bg-panel);border:1px solid var(--border);
+  border-radius:12px;padding:6px;
+}
+.tab-btn{
+  display:flex;align-items:center;gap:8px;
+  border:none;background:transparent;color:var(--text-muted);
+  font-family:var(--font-body);font-weight:600;font-size:13px;
+  padding:10px 16px;border-radius:9px;cursor:pointer;
+  transition:.16s ease;
+}
+.tab-btn:hover{color:var(--text-primary);background:var(--bg-row-hover);}
+.tab-btn .tab-dot{width:7px;height:7px;border-radius:50%;background:var(--text-dim);}
+.tab-btn[data-tab="upcoming"] .tab-dot{background:var(--accent-blue);}
+.tab-btn[data-tab="running"] .tab-dot{background:var(--accent-orange);}
+.tab-btn[data-tab="completed"] .tab-dot{background:var(--accent-green);}
+.tab-btn .tab-count{
+  font-family:var(--font-mono);font-size:11px;color:var(--text-dim);
+  background:var(--bg-row);border:1px solid var(--border-soft);
+  padding:1px 7px;border-radius:20px;
+}
+.tab-btn.active{
+  background:linear-gradient(180deg,var(--bg-row-hover),var(--bg-row));
+  color:var(--text-primary);
+  box-shadow:inset 0 0 0 1px var(--border);
+}
+.tab-btn.active[data-tab="all"]{box-shadow:inset 0 0 0 1px var(--accent-amber);}
+.tab-btn.active[data-tab="upcoming"]{box-shadow:inset 0 0 0 1px var(--accent-blue);}
+.tab-btn.active[data-tab="running"]{box-shadow:inset 0 0 0 1px var(--accent-orange);}
+.tab-btn.active[data-tab="completed"]{box-shadow:inset 0 0 0 1px var(--accent-green);}
+.tab-btn.active .tab-count{color:var(--text-primary);border-color:var(--border);}
+
+/* category select */
+.filter-row{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.filter-row .tab-row{margin-bottom:0;flex:1;}
+.category-select-wrap{
+  position:relative;display:flex;align-items:center;
+}
+.category-select-wrap::after{
+  content:"▾";position:absolute;right:14px;pointer-events:none;
+  color:var(--text-muted);font-size:12px;
+}
+#categorySelect{
+  appearance:none;-webkit-appearance:none;
+  background:var(--bg-panel);border:1px solid var(--border);
+  color:var(--text-primary);font-family:var(--font-body);font-weight:600;font-size:13px;
+  padding:12px 34px 12px 16px;border-radius:12px;
+  cursor:pointer;min-width:190px;
+  box-shadow:var(--shadow-soft);
+  transition:border-color .16s;
+}
+#categorySelect:hover,#categorySelect:focus{border-color:var(--accent-amber);outline:none;}
+
+/* ---------------- SECTIONS ---------------- */
 
 .section{
-    background:#fff;
-    border-radius:15px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-alt));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:6px 6px 20px;
+  margin-bottom:20px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
 }
-
-/* Section Titles */
 
 .title{
-    color:#fff;
-    font-size:24px;
-    font-weight:bold;
-    padding:14px 20px;
-    border-radius:10px;
-    display:inline-block;
-    margin-bottom:20px;
-    letter-spacing:1px;
+  display:flex;align-items:center;gap:11px;
+  font-family:var(--font-display);font-size:15px;font-weight:700;
+  letter-spacing:.03em;text-transform:uppercase;
+  padding:18px 20px 14px;margin-bottom:8px;
+  color:var(--text-primary);
+  border-bottom:1px solid var(--border-soft);
 }
-
-.nta,.edcil,.other{
-    background:linear-gradient(90deg,#ff6a00,#ff9900);
+.title .swatch{width:9px;height:24px;border-radius:3px;display:inline-block;}
+.title .count{
+  margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);
+  font-weight:500;letter-spacing:0;text-transform:none;
 }
+.nta .swatch{background:linear-gradient(180deg,var(--accent-amber),#c97f1a);}
+.edcil .swatch{background:linear-gradient(180deg,var(--accent-green),#15803d);}
+.other .swatch{background:linear-gradient(180deg,var(--accent-blue),#1d4ed8);}
+.testing .swatch{background:linear-gradient(180deg,var(--accent-slate),#334155);}
 
-/* Buttons */
+.link-grid{display:flex;flex-wrap:wrap;gap:10px;padding:14px 20px 4px;}
 
-.btn{
-    display:inline-block;
-    text-decoration:none;
-    color:#fff;
-    background:linear-gradient(45deg,#007bff,#00b4ff);
-    padding:14px 24px;
-    margin:8px;
-    border-radius:35px;
-    font-weight:600;
-    transition:.3s;
-    box-shadow:0 4px 10px rgba(0,123,255,.35);
+/* generic chip link (non-exam) */
+.chip{
+  display:inline-flex;align-items:center;gap:9px;
+  text-decoration:none;color:var(--text-primary);
+  background:var(--bg-row);border:1px solid var(--border-soft);
+  padding:11px 17px;border-radius:10px;
+  font-size:13.5px;font-weight:500;letter-spacing:.01em;
+  transition:.18s ease;
 }
+.chip:hover{border-color:var(--accent-amber);background:var(--bg-row-hover);transform:translateY(-2px);box-shadow:var(--shadow-soft);}
 
-.btn:hover{
-    transform:translateY(-4px);
-    background:linear-gradient(45deg,#0056b3,#0099cc);
-    box-shadow:0 8px 18px rgba(0,123,255,.45);
+/* exam row (has date/status) */
+.exam-row{
+  display:flex;align-items:center;gap:14px;
+  width:100%;text-decoration:none;color:var(--text-primary);
+  background:var(--bg-row);border:1px solid var(--border-soft);
+  border-left:3px solid var(--border-soft);
+  padding:14px 17px;border-radius:10px;
+  transition:.18s ease;
 }
+.exam-row:hover{border-color:var(--accent-amber);border-left-color:var(--accent-amber);background:var(--bg-row-hover);box-shadow:var(--shadow-soft);}
+.exam-row.status-upcoming{border-left-color:var(--accent-blue);}
+.exam-row.status-running{border-left-color:var(--accent-orange);}
+.exam-row.status-completed{border-left-color:var(--accent-green);}
+.exam-row .exam-name{font-size:13.5px;font-weight:600;flex:1;letter-spacing:.01em;}
+.exam-row .exam-date{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);white-space:nowrap;}
+.exam-list{display:flex;flex-direction:column;gap:9px;padding:14px 20px 4px;}
+.empty-note{padding:10px 20px 4px;color:var(--text-dim);font-size:12.5px;font-style:italic;}
 
-.btn-green {
-    display:inline-block;
-    padding:10px 18px;
-    background:#28a745;
-    color:#fff;
-    text-decoration:none;
-    border-radius:999px;
-    font-weight:600;
-    margin:8px;
+.status{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:20px;
+  font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;white-space:nowrap;
 }
-.btn-green:hover{background:#218838;}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;}
+.status.completed{background:var(--accent-green-dim);color:var(--accent-green);}
+.status.completed::before{background:var(--accent-green);}
+.status.running{background:var(--accent-orange-dim);color:var(--accent-orange);}
+.status.running::before{background:var(--accent-orange);animation:pulse 1.4s infinite;}
+.status.upcoming{background:var(--accent-blue-dim);color:var(--accent-blue);}
+.status.upcoming::before{background:var(--accent-blue);}
 
-.divider{
-    margin:20px 0;
-    border-top:1px solid #ddd;
-}
+.divider{height:1px;background:var(--border-soft);margin:16px 20px;}
 
 footer{
-    text-align:center;
-    margin-top:30px;
-    color:#777;
-    font-size:14px;
+  text-align:center;margin-top:26px;color:var(--text-dim);
+  font-size:12.5px;font-family:var(--font-mono);
 }
 
+.hidden{display:none !important;}
 
-.topbar{position:sticky;top:0;z-index:9999;background:linear-gradient(90deg,#003366,#0059b3,#007bff);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:12px;margin-bottom:20px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.25)}
-.brand{font-size:22px;font-weight:700}
-.clock{text-align:center}
-.clock #liveDate{font-size:14px}
-.clock #liveTime{font-size:22px;font-weight:700}
-.logoutBtn{background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer}
-.logoutBtn:hover{background:#b02a37}
-.header .datetime{display:none}
-@media(max-width:768px){.topbar{flex-direction:column;gap:8px}.brand{font-size:18px}}
-
-
-.status{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;color:#fff}
-.completed{background:#28a745}
-.running{background:#ff9800}
-.upcoming{background:#2196f3}
-
+@media(max-width:768px){
+  .topbar{flex-direction:column;align-items:stretch;text-align:center;}
+  .clock{justify-content:center;}
+  .userbox{justify-content:center;}
+  .summary-strip{grid-template-columns:repeat(2,1fr);}
+  .exam-row{flex-wrap:wrap;}
+}
 </style>
-
 </head>
 
 <body>
 
-<div id="loginPage" style="display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#003366,#007bff);">
-<div style="background:#fff;padding:35px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.3);width:360px">
-<h2 style="text-align:center;color:#003366">Exam Project Dashboard</h2>
-<input id="username" placeholder="Username" style="width:100%;padding:12px;margin:10px 0">
-<input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0">
-<label><input type="checkbox" onclick="password.type=this.checked?'text':'password'"> Show Password</label>
-<button onclick="login()" style="width:100%;padding:12px;margin-top:15px;background:#007bff;color:#fff;border:none;border-radius:8px">Login</button>
-<div id="err" style="color:red;margin-top:10px"></div>
-<p style="font-size:13px;color:#666">Login with your assigned username and password.</p>
-</div>
+<div id="loginPage">
+  <div class="login-card">
+    <div class="login-eyebrow">System Online</div>
+    <h2>Exam Project Dashboard</h2>
+    <div class="login-sub">Sign in with your assigned credentials to continue.</div>
+
+    <label class="field-label">Username</label>
+    <input id="username" type="text" placeholder="Enter username">
+
+    <label class="field-label">Password</label>
+    <input id="password" type="password" placeholder="Enter password">
+
+    <label class="show-pass"><input type="checkbox" onclick="password.type=this.checked?'text':'password'" style="accent-color:#e8a33d"> Show password</label>
+
+    <button id="loginBtn" onclick="login()">Login</button>
+    <div id="err"></div>
+    <p class="login-foot">Access is restricted to project team members. Contact your admin if you don't have a login.</p>
+  </div>
 </div>
 
 <div id="dashboard" style="display:none">
 
-<div class="topbar">
-  <div class="brand">📊 Exam Project Dashboard</div>
-  <div class="clock">
-    <div id="liveDate"></div>
-    <div id="liveTime"></div>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">EQ</div>
+      <div class="brand-text">Exam Project Dashboard<small>Operations Console</small></div>
+    </div>
+    <div class="clock">
+      <span class="live-dot"></span>
+      <div class="clock-text">
+        <div id="liveDate"></div>
+        <div id="liveTime"></div>
+      </div>
+    </div>
+    <div class="userbox">
+      <span class="userchip" id="userChip">User</span>
+      <button class="logoutBtn" onclick="logout()">Logout</button>
+    </div>
   </div>
-  <button class="logoutBtn" onclick="logout()">Logout</button>
+
+  <div class="summary-strip">
+    <div class="stat-card upcoming"><div class="num" id="statUpcoming">0</div><div class="lbl">Upcoming Exams</div></div>
+    <div class="stat-card running"><div class="num" id="statRunning">0</div><div class="lbl">Running Now</div></div>
+    <div class="stat-card completed"><div class="num" id="statCompleted">0</div><div class="lbl">Completed</div></div>
+    <div class="stat-card total"><div class="num" id="statTotal">0</div><div class="lbl">All Links</div></div>
+  </div>
+
+  <div class="search-row">
+    <input id="searchBox" type="text" placeholder="Search links — e.g. NBCC, Objection Management, ERP..." oninput="filterLinks()">
+  </div>
+
+  <div class="filter-row">
+    <div class="tab-row" role="tablist">
+      <button class="tab-btn active" data-tab="all" onclick="setTab('all')">All Exams <span class="tab-count" id="tabCountAll">0</span></button>
+      <button class="tab-btn" data-tab="upcoming" onclick="setTab('upcoming')"><span class="tab-dot"></span>Upcoming <span class="tab-count" id="tabCountUpcoming">0</span></button>
+      <button class="tab-btn" data-tab="running" onclick="setTab('running')"><span class="tab-dot"></span>Running <span class="tab-count" id="tabCountRunning">0</span></button>
+      <button class="tab-btn" data-tab="completed" onclick="setTab('completed')"><span class="tab-dot"></span>Completed <span class="tab-count" id="tabCountCompleted">0</span></button>
+    </div>
+    <div class="category-select-wrap">
+      <select id="categorySelect" onchange="setCategory(this.value)">
+        <option value="all">All Categories</option>
+        <option value="nta">NTA Projects</option>
+        <option value="edcil">EdCIL Projects</option>
+        <option value="other">Other Documents</option>
+        <option value="testing">Testing Links</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ======================= NTA ======================= -->
+  <div class="section" data-section data-category="nta">
+    <div class="title nta"><span class="swatch"></span>NTA Projects<span class="count"></span></div>
+
+    <div class="link-grid">
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing" target="_blank">📋 Exam Activity</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing" target="_blank">🏢 Exam Wise Centre</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="exam-list">
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-22">
+        <span class="exam-name">AIAPGT</span><span class="exam-date">22 Aug 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">
+        <span class="exam-name">NTA Allahabad High Court</span><span class="exam-date">Date not confirm</span>
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="link-grid">
+      <a class="chip" href="https://www.google.com" target="_blank">👥 Candidate Data</a>
+      <a class="chip" href="https://www.google.com" target="_blank">📁 Reports</a>
+      <a class="chip" href="https://www.google.com" target="_blank">☁ FTP</a>
+    </div>
+  </div>
+
+  <!-- ======================= EDCIL ======================= -->
+  <div class="section" data-section data-category="edcil">
+    <div class="title edcil"><span class="swatch"></span>EdCIL Projects<span class="count"></span></div>
+
+    <div class="link-grid">
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/18cxo1MKtTWu5NDi4a8v_Jf105kHGTPigU8FcnGymq0o/edit?usp=sharing" target="_blank">📊 Exam Wise Status</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing" target="_blank">📋 Exam Activity</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f" target="_blank">🏢 Exam Wise Centre</a>
+      <a class="chip" href="file:///C:/Users/AVNISH/OneDrive%20-%20Eduquity/Desktop/Dashboard.html" target="_blank">📄 QP Status</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="exam-list">
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank" data-date="2026-06-29">
+        <span class="exam-name">NHIDCL</span><span class="exam-date">29 Jun 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank" data-date="2026-07-01">
+        <span class="exam-name">SPMCIL (IGM)</span><span class="exam-date">01 Jul 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776" target="_blank" data-date="2026-07-15">
+        <span class="exam-name">BLCL</span><span class="exam-date">15 Jul 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319" target="_blank" data-date="2026-07-20">
+        <span class="exam-name">PSPCL</span><span class="exam-date">20 Jul 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank" data-date="2026-07-25">
+        <span class="exam-name">NBCC</span><span class="exam-date">25 Jul 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-03">
+        <span class="exam-name">SMPCIL (IGM-Re-Exam)</span><span class="exam-date">03rd Aug 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-13">
+        <span class="exam-name">NHDCIL_Mains</span><span class="exam-date">12th &amp; 13th Aug 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-11">
+        <span class="exam-name">SMPCIL (CNP)</span><span class="exam-date">18th &amp; 19th Aug 2026</span><span class="status"></span>
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1SO0RFbC_A4O_8-oidNkY9LFaNEOnHhQqk1o_beYnqmY/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-11">
+        <span class="exam-name">SAI I &amp; II</span><span class="exam-date">23rd Aug 2026</span><span class="status"></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ======================= OTHER ======================= -->
+  <div class="section" data-section data-category="other">
+    <div class="title other"><span class="swatch"></span>Other Documents<span class="count"></span></div>
+
+    <div class="link-grid">
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1btBgJIdvlVuvcmP6r-J0BueKDTYGaWolD4crATTp1S4/edit?usp=sharing_eip&ts=69dc9f86" target="_blank">📄 EDU Code (Jai)</a>
+      <a class="chip" href="https://intranet.eduquity.com/Tada_V2/Default.aspx" target="_blank">💼 TA DA Tracker</a>
+      <a class="chip" href="https://erp.eduquity.com/web/login?auth_login=Singh.rahul@eduquity.com" target="_blank">🗂 ODDO ERP</a>
+      <a class="chip" href="https://forms.gle/JXrsTDqoq82gNkDYA" target="_blank">💰 Advance Form</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/16Tf4a_-qis5kmEETxV45F-QstzelyiFf9ROklImVSAQ/edit?usp=sharing" target="_blank">📄 PMT Venue Database</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1eBqJhuAL9GLq3wv9Sk-PqAhviaN3o3CIbkIq0Nl34o4/edit?usp=sharing" target="_blank">📄 Infra Partner Regional Coverage</a>
+    </div>
+  </div>
+
+  <!-- ======================= Testing Links ======================= -->
+  <div class="section" data-section data-category="testing">
+    <div class="title testing"><span class="swatch"></span>Testing Links<span class="count"></span></div>
+
+    <div class="link-grid">
+      <a class="chip" href="https://test.cbexams.com/EDPSU/Scdfkeyadminpanelhdge/Login.aspx" target="_blank">🧪 Objection Management BLCL</a>
+      <a class="chip" href="https://test.cbexams.com/EDPSU/NHIDCL2/PhotoSign/CandidatePhotos.aspx" target="_blank">🧪 NHIDCL DM Post Candidate Images</a>
+      <a class="chip" href="https://www.google.com" target="_blank">🧪 NBCC Admit</a>
+    </div>
+  </div>
+
+  <footer>© 2026 Exam Project Dashboard · Developed for Project Management</footer>
 </div>
-
-
-
-<!-- ======================= NTA ======================= -->
-
-<div class="section">
-
-<div class="title nta">
-📘 NTA PROJECTS
-</div>
-
-<br>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing" target="_blank">📋Exam Activity</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing" target="_blank">🏢Exam Wise Centre</a>
-
-<div class="divider"></div>
-
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1O8Dzk_kYT0QyUhIEtumhs6Y_iDh1aQVFuQ0JO1n15hA/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-22">AIAPGT - 22 Aug 2026 <span class="status"></span></a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1urr6mCHbIRQujC3ZDALjTotHGnUe3dJxv8ARRcHVb7E/edit?gid=1030019082#gid=1030019082" target="_blank">NTA Allahabad High Court(Date not confirm)</a><a class="btn" href="https://www.google.com" target="_blank">👥Candidate Data</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">📁Reports</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">☁ FTP</a>
-
-</div>
-
-<!-- ======================= EDCIL ======================= -->
-
-<div class="section">
-
-<div class="title edcil">
-🟧 EdCIL PROJECTS
-</div>
-
-<br>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/18cxo1MKtTWu5NDi4a8v_Jf105kHGTPigU8FcnGymq0o/edit?usp=sharing" target="_blank">📊Exam Wise Status</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing" target="_blank">📋Exam Activity</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f" target="_blank">🏢Exam Wise Centre</a>
-    
-<a class="btn" href="file:///C:/Users/AVNISH/OneDrive%20-%20Eduquity/Desktop/Dashboard.html" target="_blank">QP Status</a>
-
-<div class="divider"></div>
-
-
-
-<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1qjD4cKO9lWjJyjlxmnMau1seqV7Qpej-YsHRqZjM-c4/edit?usp=sharing_eip&ts=6a3a23e9" target="_blank" data-date="2026-06-29">NHIDCL - 29 Jun 2026 <span class="status"></span></a>
-
-<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1CR624KDr_IKTS4SRqVJd0QAfiDsBue_gg0vpHz8wPtY/edit?gid=1524965207#gid=1524965207" target="_blank" data-date="2026-07-01">SPMCIL (IGM) - 01 Jul 2026 <span class="status"></span></a>
-
-<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1d7Ev8_CT6Q0mVYYeUD3kP0a6EG-6RKarIIDRGwwuqek/edit?usp=sharing_eip&ts=6a3ce776" target="_blank" data-date="2026-07-15">BLCL - 15 Jul 2026 <span class="status"></span></a>
-
-<a class="btn-green exam-btn" href="https://docs.google.com/spreadsheets/d/1h_ohZUkaLTZtlgPNcxhHNyeUK5tf2e3IK8j5_qvjDts/edit?gid=97813319#gid=97813319" target="_blank" data-date="2026-07-20">PSPCL - 20 Jul 2026 <span class="status"></span></a>
-
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank" data-date="2026-07-25">NBCC - 25 Jul 2026 <span class="status"></span></a>
-
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-03">SMPCIL (IGM-Re-Exam) - 03rd Aug 2026 <span class="status"></span></a>
-
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-13">NHDCIL_Mains - 12th & 13th Aug 2026 <span class="status"></span></a>
-    
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-11">SMPCIL (CNP) - 18th & 19th Aug 2026 <span class="status"></span></a>
-
-<a class="btn exam-btn" href="https://docs.google.com/spreadsheets/d/1SO0RFbC_A4O_8-oidNkY9LFaNEOnHhQqk1o_beYnqmY/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-11">SAI I & II - 23rd Aug 2026 <span class="status"></span></a>
-
-</div>
-
-<!-- ======================= OTHER ======================= -->
-
-<div class="section">
-
-<div class="title other">
-📂 OTHER DOCUMENTS
-</div>
-
-<br>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1btBgJIdvlVuvcmP6r-J0BueKDTYGaWolD4crATTp1S4/edit?usp=sharing_eip&ts=69dc9f86" target="_blank">📄EDU Code (Jai)</a>
-
-<a class="btn" href="https://intranet.eduquity.com/Tada_V2/Default.aspx
-" target="_blank">💼TA DA Tracker</a>
-
-<a class="btn" href="https://erp.eduquity.com/web/login?auth_login=Singh.rahul@eduquity.com
-" target="_blank">🗂ODDO ERP</a>
-
-<a class="btn" href="https://forms.gle/JXrsTDqoq82gNkDYA" target="_blank">💰Advance Form</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/16Tf4a_-qis5kmEETxV45F-QstzelyiFf9ROklImVSAQ/edit?usp=sharing" target="_blank">📄PMT Venue Database</a>
-
-<a class="btn" href="https://docs.google.com/spreadsheets/d/1eBqJhuAL9GLq3wv9Sk-PqAhviaN3o3CIbkIq0Nl34o4/edit?usp=sharing" target="_blank">📄Infra Partner Regional_Coverage</a>
-    
-</div>
-
-<!-- ======================= Testing Link ======================= -->
-
-<div class="section">
-
-<div class="title other">
-🧪 TESTING LINKS
-</div>
-
-<br>
-
-<a class="btn" href="https://test.cbexams.com/EDPSU/Scdfkeyadminpanelhdge/Login.aspx" target="_blank">Objection Management BLCL</a>
-
-<a class="btn" href="https://test.cbexams.com/EDPSU/NHIDCL2/PhotoSign/CandidatePhotos.aspx" target="_blank">NHIDCL DM PostCandidate Images</a>
-
-<a class="btn" href="https://www.google.com" target="_blank">NBCC ADMIT</a>
-
-</div>
-
-<footer>
-© 2026 Exam Project Dashboard | Developed for Project Management
-</footer>
 
 <script>
 
@@ -322,10 +561,8 @@ function login(){
 function loginSuccess(){
  loginPage.style.display='none';
  dashboard.style.display='block';
- const btn=document.querySelector('button[onclick="logout()"]');
- if(btn){
-   btn.textContent=(localStorage.getItem('examUser')||'User')+' | Logout';
- }
+ const chip=document.getElementById('userChip');
+ if(chip){ chip.textContent = localStorage.getItem('examUser') || 'User'; }
 }
 
 function logout(){
@@ -335,7 +572,7 @@ function logout(){
 }
 
 password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
-
+username.addEventListener('keydown',e=>{if(e.key==='Enter')password.focus();});
 
 function updateLiveDateTime(){
  const now=new Date();
@@ -345,22 +582,88 @@ function updateLiveDateTime(){
 setInterval(updateLiveDateTime,1000);
 updateLiveDateTime();
 
+let currentTab='all';
+let currentCategory='all';
+
+function setCategory(category){
+ currentCategory=category;
+ filterLinks();
+}
 
 function updateExamStatus(){
-const t=new Date();t.setHours(0,0,0,0);
-document.querySelectorAll('.exam-btn').forEach(b=>{
- let s=b.querySelector('.status'); if(!s)return;
- let d=new Date(b.dataset.date); d.setHours(0,0,0,0);
- let r=new Date(d); r.setDate(r.getDate()-3);
- if(t>d){s.textContent='Completed';s.className='status completed';}
- else if(t>=r){s.textContent='Running';s.className='status running';}
- else{s.textContent='Upcoming';s.className='status upcoming';}
-});
+ const t=new Date(); t.setHours(0,0,0,0);
+ let upcoming=0, running=0, completed=0;
+ document.querySelectorAll('.exam-btn').forEach(b=>{
+   let s=b.querySelector('.status'); if(!s) return;
+   let d=new Date(b.dataset.date); d.setHours(0,0,0,0);
+   let r=new Date(d); r.setDate(r.getDate()-3);
+   b.classList.remove('status-completed','status-running','status-upcoming');
+   let key;
+   if(t>d){ s.textContent='Completed'; s.className='status completed'; key='completed'; completed++; }
+   else if(t>=r){ s.textContent='Running'; s.className='status running'; key='running'; running++; }
+   else{ s.textContent='Upcoming'; s.className='status upcoming'; key='upcoming'; upcoming++; }
+   b.classList.add('status-'+key);
+   b.dataset.status=key;
+ });
+ document.getElementById('statUpcoming').textContent=upcoming;
+ document.getElementById('statRunning').textContent=running;
+ document.getElementById('statCompleted').textContent=completed;
+ document.getElementById('statTotal').textContent=document.querySelectorAll('.chip, .exam-row').length;
+
+ document.getElementById('tabCountAll').textContent=upcoming+running+completed;
+ document.getElementById('tabCountUpcoming').textContent=upcoming;
+ document.getElementById('tabCountRunning').textContent=running;
+ document.getElementById('tabCountCompleted').textContent=completed;
+
+ filterLinks();
 }
 document.addEventListener('DOMContentLoaded',updateExamStatus);
 
+function setTab(tab){
+ currentTab=tab;
+ document.querySelectorAll('.tab-btn').forEach(btn=>{
+   btn.classList.toggle('active', btn.dataset.tab===tab);
+ });
+ filterLinks();
+}
+
+function filterLinks(){
+ const q=document.getElementById('searchBox').value.trim().toLowerCase();
+
+ document.querySelectorAll('[data-section]').forEach(section=>{
+   const sectionCategory=section.dataset.category||'';
+   const categoryMatch=currentCategory==='all' || sectionCategory===currentCategory;
+
+   if(!categoryMatch){
+     section.classList.add('hidden');
+     return;
+   }
+
+   let anyVisible=false;
+
+   section.querySelectorAll('.exam-row').forEach(el=>{
+     const text=el.textContent.toLowerCase();
+     const textMatch=q==='' || text.includes(q);
+     const tabMatch=currentTab==='all' || el.dataset.status===currentTab;
+     const match=textMatch && tabMatch;
+     el.classList.toggle('hidden',!match);
+     if(match) anyVisible=true;
+   });
+
+   section.querySelectorAll('.chip').forEach(el=>{
+     const text=el.textContent.toLowerCase();
+     const textMatch=q==='' || text.includes(q);
+     const tabMatch=currentTab==='all';
+     const match=textMatch && tabMatch;
+     el.classList.toggle('hidden',!match);
+     if(match) anyVisible=true;
+   });
+
+   section.classList.toggle('hidden',!anyVisible);
+ });
+}
+
 </script>
 
-</div>
 </body>
 </html>
