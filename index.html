@@ -361,6 +361,52 @@ footer{
   .exam-row{flex-wrap:wrap;}
 }
 </style>
+
+<style>
+/* ===== Premium Theme Overrides ===== */
+body{
+  background:linear-gradient(135deg,#eef4ff,#f8fbff);
+}
+.topbar{
+  background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb)!important;
+  color:#fff;
+}
+.brand-text,.clock-text #liveDate,.clock-text #liveTime,.userchip{color:#fff!important;}
+.stat-card{
+  transition:.25s;
+  border-radius:16px!important;
+}
+.stat-card:hover,.exam-row:hover,.chip:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 16px 36px rgba(37,99,235,.18)!important;
+}
+.exam-row{
+  border-radius:14px!important;
+}
+.chip{
+  border-radius:12px!important;
+  background:linear-gradient(135deg,#ffffff,#f2f7ff)!important;
+}
+.section{
+  border-radius:18px!important;
+}
+#searchBox{
+  border-radius:30px!important;
+  padding-left:20px!important;
+}
+.title{
+  background:linear-gradient(90deg,#f8fbff,#eef5ff);
+}
+
+#liveDate,#liveTime,#userChip{
+color:#fff !important;
+opacity:1 !important;
+visibility:visible !important;
+font-weight:600;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -441,7 +487,6 @@ footer{
     <div class="link-grid">
       <a class="chip" href="https://docs.google.com/spreadsheets/d/1SLkFf1X5kK1G15qg3UTvfE_UMUUR3pJ_JxwJQgNNuIY/edit?usp=sharing" target="_blank">📋 Exam Activity</a>
       <a class="chip" href="https://docs.google.com/spreadsheets/d/1WIN5nkWXIcW1C-KRw7ncNtdYndRqIfBD3ZjhswrthRY/edit?usp=sharing" target="_blank">🏢 Exam Wise Centre</a>
-      <a class="chip" href="https://docs.google.com/spreadsheets/d/1za2SoniDgq4DbmJhLahBbq6a_0GtUj-z13AEzCoZhsE/edit?gid=2009228656#gid=2009228656" target="_blank">🏢 Reports</a>
     </div>
 
     <div class="divider"></div>
@@ -560,10 +605,24 @@ function login(){
 }
 
 function loginSuccess(){
- loginPage.style.display='none';
- dashboard.style.display='block';
- const chip=document.getElementById('userChip');
- if(chip){ chip.textContent = localStorage.getItem('examUser') || 'User'; }
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+
+  const chip=document.getElementById('userChip');
+  const user=localStorage.getItem('examUser') || 'Guest';
+  if(chip){
+    chip.textContent='👤 '+user;
+    chip.style.display='inline-flex';
+    chip.style.visibility='visible';
+    chip.style.opacity='1';
+  }
+
+  updateLiveDateTime();
+
+  if(window.clockInterval){
+    clearInterval(window.clockInterval);
+  }
+  window.clockInterval=setInterval(updateLiveDateTime,1000);
 }
 
 function logout(){
@@ -576,12 +635,30 @@ password.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
 username.addEventListener('keydown',e=>{if(e.key==='Enter')password.focus();});
 
 function updateLiveDateTime(){
- const now=new Date();
- document.getElementById('liveDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
- document.getElementById('liveTime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+  const now=new Date();
+
+  const d=document.getElementById('liveDate');
+  const t=document.getElementById('liveTime');
+
+  if(d){
+    d.textContent=now.toLocaleDateString('en-IN',{
+      weekday:'long',
+      day:'2-digit',
+      month:'long',
+      year:'numeric'
+    });
+  }
+
+  if(t){
+    t.textContent=now.toLocaleTimeString('en-IN',{
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:true
+    });
+  }
 }
-setInterval(updateLiveDateTime,1000);
-updateLiveDateTime();
+
 
 let currentTab='all';
 let currentCategory='all';
