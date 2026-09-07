@@ -361,6 +361,60 @@ footer{
   font-size:12.5px;font-family:var(--font-mono);
 }
 
+
+/* ===== EDCIL Completed / Upcoming Tabs ===== */
+.edcil-tabs{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 20px 14px;
+  border-bottom:1px solid var(--border-soft);
+}
+.edcil-tab-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--text-muted);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:12.5px;
+  padding:9px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  transition:.16s ease;
+}
+.edcil-tab-btn:hover{
+  color:var(--text-primary);
+  background:var(--bg-row-hover);
+}
+.edcil-tab-btn.active{
+  color:var(--accent-green);
+  background:var(--accent-green-dim);
+  border-color:#158a4d33;
+}
+.edcil-tab-btn .edcil-tab-count{
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  color:var(--text-dim);
+  background:var(--bg-row);
+  border:1px solid var(--border-soft);
+  padding:1px 7px;
+  border-radius:20px;
+}
+.edcil-tab-btn.active .edcil-tab-count{
+  color:var(--accent-green);
+  border-color:#158a4d33;
+}
+.edcil-empty{
+  display:none;
+  padding:18px 20px 8px;
+  color:var(--text-dim);
+  font-size:12.5px;
+  font-style:italic;
+}
+
 .hidden{display:none !important;}
 
 @media(max-width:768px){
@@ -537,14 +591,22 @@ font-weight:700;
       <a class="chip" href="https://docs.google.com/spreadsheets/d/1m52R1Zm4LgWgaFHPNXVWZAMzqzfIrEewIJWeUTPPCec/edit?usp=sharing" target="_blank">📋 Exam Activity</a>
       <a class="chip" href="https://docs.google.com/spreadsheets/d/1uJK84_8Cr5znlcd2vIK21nsL4yJ1vradnuk1fnDfjk8/edit?usp=sharing_eip&ts=6a58648f" target="_blank">🏢 Exam Wise Centre</a>
       <a class="chip" href="https://drive.google.com/drive/folders/1coG-8BMdT0TL6yqch-lZQ3V3j0QyEg6t?usp=drive_link" target="_blank">📄 Allocation Data</a>
-       <a class="chip" href="https://docs.google.com/spreadsheets/d/1NehIKwNw60YDJA8SzDtHkahMayPLY4pCLNZapU58GCY/edit?usp=sharing" target="_blank">📄 Upcoming Cities Count</a>
+      <a class="chip" href="https://docs.google.com/spreadsheets/d/1NehIKwNw60YDJA8SzDtHkahMayPLY4pCLNZapU58GCY/edit?usp=sharing" target="_blank">📄 Upcoming Cities Count</a>
     </div>
 
     <div class="divider"></div>
 
-    <div class="link-grid">
-      
-      
+    <div class="edcil-tabs" role="tablist" aria-label="EdCIL project status">
+      <button class="edcil-tab-btn active" data-edcil-tab="completed" onclick="setEdcilTab('completed')">
+        ✓ Completed <span class="edcil-tab-count" id="edcilCountCompleted">0</span>
+      </button>
+      <button class="edcil-tab-btn" data-edcil-tab="upcoming" onclick="setEdcilTab('upcoming')">
+        📅 Upcoming <span class="edcil-tab-count" id="edcilCountUpcoming">0</span>
+      </button>
+    </div>
+
+    <div class="exam-grid" id="edcilProjectGrid">
+
       <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/156QdgExqDR48e0K7jZpPhZx-fMYsDSwM0toPvRlDkvM/edit?gid=1024023478#gid=1024023478" target="_blank" data-date="2026-08-17">
         <span class="exam-name">SMPCIL (CNP)</span><span class="exam-date">18th &amp; 19th Aug 2026</span><span class="status"></span>
       </a>
@@ -553,9 +615,6 @@ font-weight:700;
       </a>
       <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1E2E2NKkiyytqiVGQyn3gLj4v9p-XuC1E0Aav6vEs1H8/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-24">
         <span class="exam-name">NHIDCL DM Finance&amp; II</span><span class="exam-date">24th Aug 2026</span><span class="status"></span>
-      </a>
-      
-      <!-- ======================= Completed ======================= -->
       </a>
       <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1vB8_5kUjyge7yNm_qnddyzqW4v4XZPZOILooWLlMEPc/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-13">
         <span class="exam-name">NHDCIL_Mains</span><span class="exam-date">12th &amp; 13th Aug 2026</span><span class="status"></span>
@@ -574,15 +633,17 @@ font-weight:700;
       </a>
       <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1-K4Suk_CJZeBEzGlFbfV5gocJfi6AspdOI2lLdpPxKE/edit?usp=sharing_eip&ts=6a3ce789" target="_blank" data-date="2026-07-25">
         <span class="exam-name">NBCC</span><span class="exam-date">25 Jul 2026</span><span class="status"></span>
-    </a>
-        <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-03">
+      </a>
+      <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1BVA6vaw6Zs8Vf9JW4Bvne-B74eGC8f2DSjwLVJMKFlM/edit?gid=1030019082#gid=1030019082" target="_blank" data-date="2026-08-03">
         <span class="exam-name">SMPCIL (IGM-Re-Exam)</span><span class="exam-date">03rd Aug 2026</span><span class="status"></span>
       </a>
-        </div>
+
+      <div class="edcil-empty" id="edcilEmpty">No upcoming EdCIL projects.</div>
+    </div>
   </div>
 
-  
- <div class="section" data-section data-category="other Project">
+
+  <div class="section" data-section data-category="other Project">
 
     <div class="title other Projects">
         <span class="swatch"></span>
@@ -736,6 +797,7 @@ function updateLiveDateTime(){
 
 let currentTab='all';
 let currentCategory='all';
+let currentEdcilTab='completed';
 
 function setCategory(category){
  currentCategory=category;
@@ -777,6 +839,27 @@ function setTab(tab){
    btn.classList.toggle('active', btn.dataset.tab===tab);
  });
  filterLinks();
+}
+
+
+function setEdcilTab(tab){
+  currentEdcilTab=tab;
+  document.querySelectorAll('.edcil-tab-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.edcilTab===tab);
+  });
+  filterLinks();
+}
+
+function updateEdcilTabCounts(){
+  let completed=0, upcoming=0;
+  document.querySelectorAll('[data-category="edcil"] .exam-row').forEach(el=>{
+    if(el.dataset.status==='completed') completed++;
+    if(el.dataset.status==='upcoming' || el.dataset.status==='running') upcoming++;
+  });
+  const c=document.getElementById('edcilCountCompleted');
+  const u=document.getElementById('edcilCountUpcoming');
+  if(c) c.textContent=completed;
+  if(u) u.textContent=upcoming;
 }
 
 function filterLinks(){
