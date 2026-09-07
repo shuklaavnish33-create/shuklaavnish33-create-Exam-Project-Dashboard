@@ -424,6 +424,15 @@ footer{
   .summary-strip{grid-template-columns:repeat(2,1fr);}
   .exam-row{flex-wrap:wrap;}
 }
+
+/* EdCIL Completed / Upcoming tabs */
+.edcil-tabs{display:flex;gap:6px;padding:8px 20px 12px;border-bottom:1px solid var(--border-soft)}
+.edcil-tab-btn{border:1px solid transparent;background:transparent;color:var(--text-muted);font-family:var(--font-body);font-weight:600;font-size:12.5px;padding:9px 15px;border-radius:9px;cursor:pointer;transition:.16s}
+.edcil-tab-btn:hover{color:var(--text-primary);background:var(--bg-row-hover)}
+.edcil-tab-btn.active{color:var(--accent-green);background:var(--accent-green-dim);border-color:#158a4d33}
+.edcil-tab-count{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);background:var(--bg-row);border:1px solid var(--border-soft);padding:1px 7px;border-radius:20px}
+.edcil-empty{display:none;padding:10px 20px 4px;color:var(--text-dim);font-size:12.5px;font-style:italic}
+
 </style>
 
 <style>
@@ -597,15 +606,15 @@ font-weight:700;
     <div class="divider"></div>
 
     <div class="edcil-tabs" role="tablist" aria-label="EdCIL project status">
-      <button class="edcil-tab-btn active" data-edcil-tab="completed" onclick="setEdcilTab('completed')">
+      <button type="button" class="edcil-tab-btn active" data-edcil-tab="completed" onclick="setEdcilTab('completed')">
         ✓ Completed <span class="edcil-tab-count" id="edcilCountCompleted">0</span>
       </button>
-      <button class="edcil-tab-btn" data-edcil-tab="upcoming" onclick="setEdcilTab('upcoming')">
+      <button type="button" class="edcil-tab-btn" data-edcil-tab="upcoming" onclick="setEdcilTab('upcoming')">
         📅 Upcoming <span class="edcil-tab-count" id="edcilCountUpcoming">0</span>
       </button>
     </div>
 
-    <div class="exam-grid" id="edcilProjectGrid">
+<div class="exam-grid" id="edcilProjectGrid">
 
          <a class="exam-row exam-btn" href="https://docs.google.com/spreadsheets/d/1V36-Ft7WF-ZE0x5wIIC_MXmRF3mujZNEO6rQek3hTZ8/edit?gid=97813319#gid=97813319" target="_blank" data-date="2026-09-30">
         <span class="exam-name">NHIDCL DM Stage II</span><span class="exam-date">30th Sep 2026</span><span class="status"></span>
@@ -839,6 +848,7 @@ function updateExamStatus(){
  document.getElementById('tabCountRunning').textContent=running;
  document.getElementById('tabCountCompleted').textContent=completed;
 
+ updateEdcilTabCounts();
  filterLinks();
 }
 document.addEventListener('DOMContentLoaded',updateExamStatus);
@@ -890,7 +900,10 @@ function filterLinks(){
      const text=el.textContent.toLowerCase();
      const textMatch=q==='' || text.includes(q);
      const tabMatch=currentTab==='all' || el.dataset.status===currentTab;
-     const match=textMatch && tabMatch;
+     const edcilTabMatch=(sectionCategory==='edcil' && currentTab==='all')
+       ? el.dataset.status===currentEdcilTab
+       : true;
+     const match=textMatch && tabMatch && edcilTabMatch;
      el.classList.toggle('hidden',!match);
      if(match) anyVisible=true;
    });
@@ -905,6 +918,15 @@ function filterLinks(){
    });
 
    section.classList.toggle('hidden',!anyVisible);
+
+   if(sectionCategory==='edcil' && currentTab==='all'){
+     const empty=document.getElementById('edcilEmpty');
+     if(empty){
+       const hasVisible=[...section.querySelectorAll('.exam-row')]
+         .some(el=>!el.classList.contains('hidden'));
+       empty.style.display=hasVisible?'none':'block';
+     }
+   }
  });
 }
 
